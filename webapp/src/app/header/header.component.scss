@@ -1,0 +1,190 @@
+@use '../../styles.scss' as *;
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  .header-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: inherit;
+    background: $orange-main;
+
+    .header-contact {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: inherit;
+      max-width: 1200px;
+      padding: 10px 15px;
+      color: $white-main;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.06px;
+
+      .contact-number {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.015);
+        }
+      }
+
+      .contact-other {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        h4 {
+          opacity: 0.7;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            transform: scale(1.015);
+            opacity: 1;
+          }
+        }
+
+        .language {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          padding: 7px 10px;
+          border-radius: 12px;
+          background: $white-main;
+          min-width: 48px;
+          min-height: 38px;
+
+          img {
+            width: 28px;
+            border-radius: 4px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    width: inherit;
+    background: $gray-primary;
+
+    .nav-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: inherit;
+      background: $gray-primary;
+
+      .bottom-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: inherit;
+        max-width: 1200px;
+        padding: 15px;
+        height: 70px;
+
+        .logo {
+          cursor: pointer;
+
+          img {
+            width: 150px;
+            height: 40px;
+          }
+        }
+
+        .main {
+          display: flex;
+          color: $white-main;
+          font-size: 14px;
+          line-height: 17px;
+          gap: 20px;
+
+          .navigation {
+            background-color: $orange-main;
+            width: 130px;
+            border-radius: 12px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            cursor: pointer;
+            filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 2px 10px);
+          }
+
+          .search {
+            display: flex;
+            width: 400px;
+            height: 100%;
+            padding: 11px;
+            background: $white-main;
+            border-radius: 12px;
+            border: 1px $orange-main solid;
+            gap: 15px;
+            filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 2px 10px);
+
+            input {
+              appearance: none;
+              border: none;
+              outline: none;
+              width: 90%;
+            }
+          }
+
+          .cart,
+          .login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            width: 130px;
+            background: $white-main;
+            color: $black-main;
+            border-radius: 12px;
+            gap: 10px;
+            opacity: 0.8;
+            filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 2px 10px);
+            cursor: pointer;
+
+            h4 {
+              font-size: 14px;
+              line-height: 17px;
+            }
+          }
+
+          .discount {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            background: $orange-main;
+            border-radius: 12px;
+            gap: 10px;
+            padding: 10px;
+            cursor: pointer;
+            filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 2px 10px);
+
+            h4 {
+              font-size: 20px;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

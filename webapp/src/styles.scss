@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'firago-regular';
+  src: url('/fonts/firago-regular.ttf'), format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'firago-medium';
+  src: url('/fonts/firago-medium.ttf'), format('truetype');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'firago-semibold';
+  src: url('/fonts/firago-semibold.ttf'), format('truetype');
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'firago-regular', sans-serif;
+}
+
+$orange-main: #ec5e2a;
+$orange-primary: #f28f6a;
+$orange-second: #f6af95;
+$red-main: red;
+$black-main: #000;
+$gray-primary: #edebebbd;
+$white-main: #ffffff;
