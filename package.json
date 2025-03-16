@@ -1,0 +1,27 @@
+{
+  "name": "template",
+  "private": true,
+  "version": "0.0.0",
+  "author": "Nika Puturidze",
+  "type": "module",
+  "scripts": {
+    "w": "pnpm --filter @template/webapp",
+    "b": "pnpm --filter @template/backend",
+    "start": "pnpm -r --parallel start",
+    "build": "pnpm -r --parallel build",
+    "prettify": "pnpm -r --parallel prettify",
+    "lint": "concurrently 'pnpm b lint' 'pnpm w lint'",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^5.0.10"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --fix",
+    "*.js": "eslint --fix"
+  }
+}

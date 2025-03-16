@@ -1,0 +1,6 @@
+{
+  "eslint.workingDirectories": ["backend", "webapp"],
+  "eslint.enable": true,
+  "eslint.useFlatConfig": true,
+  "editor.formatOnSave": true
+}
