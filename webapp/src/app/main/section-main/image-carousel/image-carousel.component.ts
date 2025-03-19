@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'app-image-slider',
+  selector: 'app-image-carousel',
   imports: [],
-  templateUrl: './image-slider.component.html',
-  styleUrl: './image-slider.component.scss',
+  templateUrl: './image-carousel.component.html',
+  styleUrl: './image-carousel.component.scss',
 })
-export class ImageSliderComponent implements OnInit {
+export class ImageCarouselComponent implements OnInit {
   ngOnInit(): void {
     setInterval(() => {
       if (!this.inside) {
@@ -19,6 +19,7 @@ export class ImageSliderComponent implements OnInit {
   public toMove = 0
   public translateX = ''
   public inside = false
+  public imgGap = 30
 
   imageArray = [
     { src: 'assets/main/slider/image_1.webp', width: 0 },
@@ -47,13 +48,13 @@ export class ImageSliderComponent implements OnInit {
   sliderWidth() {
     let sliderWidth = 0
     for (let i = 0; i < this.imageArray.length - 1; i++) {
-      sliderWidth += this.imageArray[i].width + 30
+      sliderWidth += this.imageArray[i].width + this.imgGap
     }
     return sliderWidth
   }
 
   nextImage() {
-    this.toMove += this.imageArray[this.imageIndex].width + 30
+    this.toMove += this.imageArray[this.imageIndex].width + this.imgGap
     if (this.imageIndex == this.imageArray.length - 1) {
       this.imageIndex = 0
       this.toMove = 0
@@ -69,8 +70,8 @@ export class ImageSliderComponent implements OnInit {
     } else {
       this.imageIndex--
       if (this.imageIndex == this.imageArray.length) {
-        this.toMove += -this.imageArray[this.imageIndex - 1].width - 30
-      } else this.toMove += -this.imageArray[this.imageIndex].width - 30
+        this.toMove += -this.imageArray[this.imageIndex - 1].width - this.imgGap
+      } else this.toMove += -this.imageArray[this.imageIndex].width - this.imgGap
     }
     this.slide()
   }

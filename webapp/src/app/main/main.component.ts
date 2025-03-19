@@ -1,9 +1,9 @@
 import { Component } from '@angular/core'
-import { ImageSliderComponent } from './image-slider/image-slider.component'
+import { SectionMainComponent } from './section-main/section-main.component'
 
 @Component({
   selector: 'app-main',
-  imports: [ImageSliderComponent],
+  imports: [SectionMainComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

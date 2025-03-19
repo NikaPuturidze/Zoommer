@@ -1,0 +1,11 @@
+@use '../../../styles.scss' as *;
+
+.section-main {
+  display: flex;
+  gap: 30px;
+  position: relative;
+
+  app-image-carousel:last-child {
+    overflow-x: hidden;
+  }
+}

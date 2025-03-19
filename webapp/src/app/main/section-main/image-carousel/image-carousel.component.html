@@ -1,0 +1,13 @@
+<section class="section-carousel">
+  <div (mouseenter)="enter()" (mouseleave)="leave()" class="slider-wrapper">
+    <div class="slider" [style.transform]="translateX">
+      @for (image of imageArray; track $index) {
+        <img (load)="onImageLoad($event, $index)" [src]="image.src" />
+      }
+    </div>
+    <div class="arrows">
+      <img class="arrow-left arrow" (click)="previousImage()" src="assets/main/slider/slider-left-btn.svg" alt="next" />
+      <img class="arrow-right arrow" (click)="nextImage()" src="assets/main/slider/slider-right-btn.svg" alt="next" />
+    </div>
+  </div>
+</section>
