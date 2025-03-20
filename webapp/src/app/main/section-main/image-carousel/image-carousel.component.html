@@ -1,4 +1,5 @@
 <section class="section-carousel">
+  <div class="empty"></div>
   <div (mouseenter)="enter()" (mouseleave)="leave()" class="slider-wrapper">
     <div class="slider" [style.transform]="translateX">
       @for (image of imageArray; track $index) {

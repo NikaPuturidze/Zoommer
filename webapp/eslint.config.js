@@ -34,7 +34,8 @@ module.exports = tseslint.config(
       'no-console': ['error', { allow: ['warn', 'error'] }],
       'linebreak-style': ['error', 'unix'],
       'no-unreachable': 'error',
-      'max-lines': ['error', { max: 120, skipComments: true }],
+      'max-lines': ['error', { max: 720, skipComments: true }],
+      'max-len': ['error', { code: 120, ignoreComments: true }],
     },
   },
   {

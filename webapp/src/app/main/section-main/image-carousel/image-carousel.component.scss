@@ -6,12 +6,17 @@ button {
 }
 
 .section-carousel {
-  width: min-content;
-  height: 342px;
+  display: flex;
+  height: 340px;
+
+  .empty {
+    min-width: 246px;
+    height: inherit;
+  }
 
   .slider-wrapper {
-    width: 100%;
     height: inherit;
+    overflow-x: hidden;
 
     .slider {
       display: flex;
@@ -39,7 +44,6 @@ button {
 
       .arrow {
         cursor: pointer;
-        z-index: 1;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 10px;
         border-radius: 50%;
       }

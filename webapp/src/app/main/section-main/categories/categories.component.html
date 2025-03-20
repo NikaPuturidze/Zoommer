@@ -1,50 +1,46 @@
 <section class="section-categories">
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/mobile.svg" alt="mobiles" />
-      <span>მობილურები</span>
-    </div>
+  <div class="categories">
+    @for (category of categoriesArray; track $index) {
+      <div (mouseenter)="getCategory($index)" class="category-wrapper">
+        <div class="category">
+          <img [src]="category.img" [alt]="category.name" />
+          <span>{{ category.name }}</span>
+        </div>
+        @if ($index !== categoriesArray.length - 1) {
+          <div class="separator"></div>
+        }
+      </div>
+    }
   </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/tablet.svg" alt="tablets" />
-      <span>ტაბები</span>
-    </div>
-  </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/IT.svg" alt="it" />
-      <span>ლეპტოპები | IT</span>
-    </div>
-  </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/smart_house.svg" alt="smart_house" />
-      <span>სმარტ გაჯეტები</span>
-    </div>
-  </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/speaker.svg" alt="gaming" />
-      <span>აუდიო სისტემა</span>
-    </div>
-  </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/joystick.svg" alt="tv" />
-      <span>Gaming</span>
-    </div>
-  </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/TV.svg" alt="camera" />
-      <span>TV | მონიტორები</span>
-    </div>
-  </div>
-  <div class="category">
-    <div class="content">
-      <img src="/assets/main/categories/photo_camera.svg" alt="camera" />
-      <span>ფოტო | ვიდეო</span>
+  <div
+    class="inner-content"
+    [style.height]="
+      viewportWidth >= 1200
+        ? categoriesArray[showingCategory].html.height
+        : categoriesArray[showingCategory].html.heightAfter
+    "
+  >
+    <div
+      class="content"
+      [style.height]="
+        viewportWidth >= 1200
+          ? categoriesArray[showingCategory].html.height
+          : categoriesArray[showingCategory].html.heightAfter
+      "
+    >
+      @for (productsItem of categoriesArray[showingCategory].products; track $index) {
+        <div class="content-wrapper">
+          <h5 class="title">{{ productsItem.title }}</h5>
+          <ul>
+            @for (model of productsItem.models; track $index) {
+              <li class="model-name">{{ model }}</li>
+            }
+          </ul>
+
+          <span class="viewall">{{ productsItem.viewAll }}</span>
+        </div>
+      }
+      <img class="thumb" [src]="categoriesArray[showingCategory].html.thumbUrl" />
     </div>
   </div>
 </section>
