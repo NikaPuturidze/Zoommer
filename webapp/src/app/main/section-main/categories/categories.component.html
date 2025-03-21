@@ -1,12 +1,12 @@
 <section class="section-categories">
   <div class="categories">
-    @for (category of categoriesArray; track $index) {
+    @for (category of categories; track $index) {
       <div (mouseenter)="getCategory($index)" class="category-wrapper">
         <div class="category">
           <img [src]="category.img" [alt]="category.name" />
           <span>{{ category.name }}</span>
         </div>
-        @if ($index !== categoriesArray.length - 1) {
+        @if ($index !== categories.length - 1) {
           <div class="separator"></div>
         }
       </div>
@@ -15,32 +15,28 @@
   <div
     class="inner-content"
     [style.height]="
-      viewportWidth >= 1200
-        ? categoriesArray[showingCategory].html.height
-        : categoriesArray[showingCategory].html.heightAfter
+      viewportWidth >= 1200 ? categories[showingCategory].height : categories[showingCategory].heightAfter
     "
   >
     <div
       class="content"
       [style.height]="
-        viewportWidth >= 1200
-          ? categoriesArray[showingCategory].html.height
-          : categoriesArray[showingCategory].html.heightAfter
+        viewportWidth >= 1200 ? categories[showingCategory].height : categories[showingCategory].heightAfter
       "
     >
-      @for (productsItem of categoriesArray[showingCategory].products; track $index) {
+      @for (productsItem of categories[showingCategory].categories; track $index) {
         <div class="content-wrapper">
           <h5 class="title">{{ productsItem.title }}</h5>
           <ul>
-            @for (model of productsItem.models; track $index) {
-              <li class="model-name">{{ model }}</li>
+            @for (subCategory of productsItem.subCategories; track $index) {
+              <li class="sub-category">{{ subCategory }}</li>
             }
           </ul>
 
           <span class="viewall">{{ productsItem.viewAll }}</span>
         </div>
       }
-      <img class="thumb" [src]="categoriesArray[showingCategory].html.thumbUrl" />
+      <img class="thumb" [src]="categories[showingCategory].thumbUrl" />
     </div>
   </div>
 </section>

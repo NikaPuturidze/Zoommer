@@ -38,6 +38,8 @@ lerna-debug.log*
 .temp
 .tmp
 
+seed.ts
+
 pids
 *.pid
 *.seed
