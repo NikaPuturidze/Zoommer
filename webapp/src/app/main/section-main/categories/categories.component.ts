@@ -487,7 +487,7 @@ export class CategoriesComponent {
         thumbUrl:
           'https://s3.zoommer.ge/site/47b4a927-4b47-4b65-bc9c-477677215bebd21a9f80-1a9b-4638-bb67-a8371e9fe45c.png',
         height: '378px',
-        heightAfter: '450px',
+        heightAfter: '460px',
       },
       products: [
         {

@@ -7,7 +7,7 @@
   overflow: hidden;
   position: absolute;
   left: 0;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   background: $white-main;
   z-index: 1;
   height: 100%;
@@ -35,6 +35,7 @@
   .inner-content {
     width: 926px;
     transition: all 0.2s ease;
+
     .content {
       display: flex;
       align-content: flex-start;
@@ -108,6 +109,11 @@
       cursor: pointer;
       height: 43px;
       z-index: 4;
+      transition: all 0.1s ease-out;
+
+      &:hover {
+        background-color: $gray-primary;
+      }
 
       .category {
         display: flex;
@@ -136,7 +142,6 @@
         height: 1px;
         width: 90%;
         background: $gray-primary;
-        margin-top: -1px;
       }
     }
   }
