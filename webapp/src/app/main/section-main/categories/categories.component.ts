@@ -8,8 +8,25 @@ import { Component, HostListener } from '@angular/core'
 })
 export class CategoriesComponent {
   public cIndex = 0
-  public categoryHeight = '0px'
   public viewportWidth = 0
+  public inside = false
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.viewportWidth = window.innerWidth
+  }
+
+  enter() {
+    this.inside = true
+  }
+
+  leave() {
+    this.inside = false
+  }
+
+  getCategory(index: number) {
+    this.cIndex = index
+  }
 
   categories = [
     {
@@ -614,22 +631,4 @@ export class CategoriesComponent {
       ],
     },
   ]
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.viewportWidth = window.innerWidth
-  }
-
-  enterCategory() {
-    const currentCategory = this.categories[this.cIndex]
-    if (this.viewportWidth <= 1200) {
-      this.categoryHeight = currentCategory.heightAfter
-    } else {
-      this.categoryHeight = currentCategory.height
-    }
-  }
-
-  getCategory(index: number) {
-    this.cIndex = index
-  }
 }

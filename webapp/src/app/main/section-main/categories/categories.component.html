@@ -1,4 +1,4 @@
-<section class="section-categories">
+<section class="section-categories" (mouseenter)="enter()" (mouseleave)="leave()">
   <div class="categories">
     @for (category of categories; track $index) {
       <div (mouseenter)="getCategory($index)" class="category-wrapper">
@@ -14,7 +14,7 @@
   </div>
   <div
     class="inner-content"
-    [style.height]="viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter"
+    [style.height]="inside ? (viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter) : 0"
   >
     <div
       class="content"

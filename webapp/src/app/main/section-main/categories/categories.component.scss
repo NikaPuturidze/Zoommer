@@ -10,12 +10,11 @@
   transition: all 0.2s ease;
   background: $white-main;
   z-index: 1;
-  height: 100%;
+  height: fit-content;
   max-width: 246px;
 
   &:hover {
     max-width: 100%;
-    height: auto;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 12px;
     border-radius: 10px 0 10px 10px;
 
@@ -33,8 +32,9 @@
   }
 
   .inner-content {
-    width: 926px;
     transition: all 0.2s ease;
+    width: 926px;
+    position: relative;
 
     .content {
       display: flex;
@@ -42,7 +42,6 @@
       flex-flow: column wrap;
       gap: 30px;
       width: 100%;
-      z-index: 1;
       background: $white-main;
       padding: 20px;
 
@@ -84,6 +83,7 @@
       }
 
       .thumb {
+        transition: all 0.2s ease;
         position: absolute;
         right: 0;
         bottom: 0;
