@@ -14,17 +14,13 @@
   </div>
   <div
     class="inner-content"
-    [style.height]="
-      viewportWidth >= 1200 ? categories[showingCategory].height : categories[showingCategory].heightAfter
-    "
+    [style.height]="viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter"
   >
     <div
       class="content"
-      [style.height]="
-        viewportWidth >= 1200 ? categories[showingCategory].height : categories[showingCategory].heightAfter
-      "
+      [style.height]="viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter"
     >
-      @for (productsItem of categories[showingCategory].categories; track $index) {
+      @for (productsItem of categories[cIndex].categories; track $index) {
         <div class="content-wrapper">
           <h5 class="title">{{ productsItem.title }}</h5>
           <ul>
@@ -36,7 +32,7 @@
           <span class="viewall">{{ productsItem.viewAll }}</span>
         </div>
       }
-      <img class="thumb" [src]="categories[showingCategory].thumbUrl" />
+      <img class="thumb" [src]="categories[cIndex].thumbUrl" />
     </div>
   </div>
 </section>

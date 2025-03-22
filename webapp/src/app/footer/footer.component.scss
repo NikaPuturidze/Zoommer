@@ -41,6 +41,12 @@ footer {
                 &:last-child {
                   align-items: flex-end;
                   gap: 30px;
+                  min-width: 240px;
+
+                  img {
+                    min-width: 135px;
+                    min-height: 26px;
+                  }
                 }
               }
             }
@@ -76,6 +82,12 @@ footer {
               font-size: 12px;
               line-height: 20px;
               cursor: pointer;
+              min-height: 26px;
+
+              img {
+                min-width: 20px;
+                min-height: 20px;
+              }
             }
           }
         }

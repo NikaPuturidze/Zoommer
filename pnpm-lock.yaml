@@ -150,6 +150,9 @@ importers:
       '@angular/router':
         specifier: ^19.2.0
         version: 19.2.2(@angular/common@19.2.2(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))(@angular/platform-browser@19.2.2(@angular/common@19.2.2(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0)))(rxjs@7.8.2)
+      '@ngneat/content-loader':
+        specifier: ^7.0.0
+        version: 7.0.0(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))
       ng-image-slider:
         specifier: 3.0.1
         version: 3.0.1(@angular/common@19.2.2(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))(rxjs@7.8.2))(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))
@@ -1792,6 +1795,11 @@ packages:
         optional: true
       '@nestjs/platform-express':
         optional: true
+
+  '@ngneat/content-loader@7.0.0':
+    resolution: {integrity: sha512-CfwsDxh2hsQfUwca3SWnyjQD5jcG6Vb6Ew0JIztj/spr3YIC9Obz7AqEVMDYPKch4QzPJiJ6OVRuLRM2DKiG9g==}
+    peerDependencies:
+      '@angular/core': '>= 13.0.0'
 
   '@ngtools/webpack@19.2.3':
     resolution: {integrity: sha512-jN9wxtrLKX1myOXYMRiOs3jCgdruvYW13zHQWTmh1oyKiYNA0wO328R9nHUTRcYaXzj2nhUZvksafqHf254GWQ==}
@@ -8706,6 +8714,11 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@nestjs/platform-express': 11.0.11(@nestjs/common@11.0.11(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.0.11)
+
+  '@ngneat/content-loader@7.0.0(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0))':
+    dependencies:
+      '@angular/core': 19.2.2(rxjs@7.8.2)(zone.js@0.15.0)
+      tslib: 2.8.1
 
   '@ngtools/webpack@19.2.3(@angular/compiler-cli@19.2.2(@angular/compiler@19.2.2(@angular/core@19.2.2(rxjs@7.8.2)(zone.js@0.15.0)))(typescript@5.7.3))(typescript@5.7.3)(webpack@5.98.0(esbuild@0.25.1))':
     dependencies:
