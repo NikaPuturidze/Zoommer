@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router'
-import { SectionMainComponent } from './main/section-main/section-main.component'
+import { MainComponent } from './main/main.component'
 export const routes: Routes = [
   {
     path: '',
-    component: SectionMainComponent,
+    component: MainComponent,
     title: 'Zoommer.ge',
   },
 ]

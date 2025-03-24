@@ -16,10 +16,12 @@ export class CategoriesComponent {
     this.viewportWidth = window.innerWidth
   }
 
+  @HostListener('mouseenter')
   enter() {
     this.inside = true
   }
 
+  @HostListener('mouseleave')
   leave() {
     this.inside = false
   }

@@ -1,38 +1,36 @@
-<section class="section-categories" (mouseenter)="enter()" (mouseleave)="leave()">
-  <div class="categories">
-    @for (category of categories; track $index) {
-      <div (mouseenter)="getCategory($index)" class="category-wrapper">
-        <div class="category">
-          <img [src]="category.img" [alt]="category.name" />
-          <span>{{ category.name }}</span>
-        </div>
-        @if ($index !== categories.length - 1) {
-          <div class="separator"></div>
-        }
+<div class="categories">
+  @for (category of categories; track $index) {
+    <div (mouseenter)="getCategory($index)" class="category-wrapper">
+      <div class="category">
+        <img [src]="category.img" [alt]="category.name" />
+        <span>{{ category.name }}</span>
+      </div>
+      @if ($index !== categories.length - 1) {
+        <div class="separator"></div>
+      }
+    </div>
+  }
+</div>
+<div
+  class="inner-content"
+  [style.height]="inside ? (viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter) : 0"
+>
+  <div
+    class="content"
+    [style.height]="viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter"
+  >
+    @for (productsItem of categories[cIndex].categories; track $index) {
+      <div class="content-wrapper">
+        <h5 class="title">{{ productsItem.title }}</h5>
+        <ul>
+          @for (subCategory of productsItem.subCategories; track $index) {
+            <li class="sub-category">{{ subCategory }}</li>
+          }
+        </ul>
+
+        <span class="viewall">{{ productsItem.viewAll }}</span>
       </div>
     }
+    <img class="thumb" [src]="categories[cIndex].thumbUrl" />
   </div>
-  <div
-    class="inner-content"
-    [style.height]="inside ? (viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter) : 0"
-  >
-    <div
-      class="content"
-      [style.height]="viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter"
-    >
-      @for (productsItem of categories[cIndex].categories; track $index) {
-        <div class="content-wrapper">
-          <h5 class="title">{{ productsItem.title }}</h5>
-          <ul>
-            @for (subCategory of productsItem.subCategories; track $index) {
-              <li class="sub-category">{{ subCategory }}</li>
-            }
-          </ul>
-
-          <span class="viewall">{{ productsItem.viewAll }}</span>
-        </div>
-      }
-      <img class="thumb" [src]="categories[cIndex].thumbUrl" />
-    </div>
-  </div>
-</section>
+</div>

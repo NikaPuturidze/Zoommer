@@ -5,10 +5,14 @@ button {
   z-index: 999;
 }
 
-.section-carousel {
+:host {
   display: flex;
   height: 340px;
   gap: 40px;
+
+  &:last-child {
+    overflow-x: hidden;
+  }
 
   .empty {
     min-width: 246px;
