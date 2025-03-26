@@ -1,12 +1,13 @@
 {
-  "name": "template",
+  "name": "zoommer",
   "private": true,
   "version": "0.0.0",
   "author": "Nika Puturidze",
   "type": "module",
   "scripts": {
-    "w": "pnpm --filter @template/webapp",
-    "b": "pnpm --filter @template/backend",
+    "w": "pnpm --filter @zoommer/webapp",
+    "b": "pnpm --filter @zoommer/backend",
+    "s": "pnpm --filter @zoommer/shared",
     "start": "pnpm -r --parallel start",
     "build": "pnpm -r --parallel build",
     "prettify": "pnpm -r --parallel prettify",

@@ -1,5 +1,5 @@
 {
-  "name": "@template/webapp",
+  "name": "@zoommer/webapp",
   "version": "0.0.0",
   "author": "Nika Puturidze",
   "private": true,
@@ -11,6 +11,7 @@
     "lint": "ng lint"
   },
   "dependencies": {
+    "@zoommer/shared": "workspace:*",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",

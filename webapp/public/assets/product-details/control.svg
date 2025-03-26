@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 18 18"
+    class="priceControlled ? 'active-price-controll' : ''">
+    <path stroke="#515458" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M11.685 9c0 1.485-1.2 2.685-2.685 2.685A2.68 2.68 0 0 1 6.315 9c0-1.485 1.2-2.685 2.685-2.685s2.685 1.2 2.685 2.685">
+    </path>
+    <path stroke="#515458" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+        d="M9 15.203c2.647 0 5.115-1.56 6.832-4.26.675-1.058.675-2.835 0-3.893C14.115 4.35 11.647 2.79 9 2.79S3.885 4.35 2.167 7.05c-.675 1.058-.675 2.835 0 3.893 1.718 2.7 4.185 4.26 6.833 4.26">
+    </path>
+</svg>

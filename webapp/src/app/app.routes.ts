@@ -8,7 +8,7 @@ export const routes: Routes = [
     title: 'Zoommer.ge',
   },
   {
-    path: 'products/:productCategory/:subCategory/:id',
+    path: ':category/:id',
     component: ProductDetailsComponent,
     title: 'Zoommer.ge',
   },
