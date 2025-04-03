@@ -111,13 +111,13 @@
           @for (product of products; track $index) {
             <div class="product-container">
               <div class="product">
-                <a class="image">
+                <a [routerLink]="'/' + product.route" class="image">
                   <img [src]="product.imageUrl" />
                   @if (product.labelText) {
                     <div class="best">{{ product.labelText }}</div>
                   }
                 </a>
-                <div class="description">
+                <div [routerLink]="'/' + product.route" class="description">
                   <div class="price">
                     <h4 [style.color]="product.previousPrice ? '#ec5e2a' : '#000'">{{ product.price }} ₾</h4>
                     @if (product.previousPrice) {

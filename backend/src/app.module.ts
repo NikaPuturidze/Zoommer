@@ -5,10 +5,12 @@ import { FilterController } from './filter/filter.controller'
 import { ProductsService } from './products/products.service'
 import { MegaMenuService } from './mega-menu/mega-menu.service'
 import { FilterService } from './filter/filter.service'
+import { DetailsController } from './details/details.controller'
+import { DetailsService } from './details/details.service'
 
 @Module({
   imports: [],
-  controllers: [ProductsController, MegaMenuController, FilterController],
-  providers: [ProductsService, MegaMenuService, FilterService],
+  controllers: [ProductsController, MegaMenuController, FilterController, DetailsController],
+  providers: [ProductsService, MegaMenuService, FilterService, DetailsService],
 })
 export class AppModule {}

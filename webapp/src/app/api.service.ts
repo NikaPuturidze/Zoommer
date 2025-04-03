@@ -36,4 +36,8 @@ export class ApiService {
 
     return this.http.get<ProductResponse[]>(`${this.apiUrl}products`, { params })
   }
+
+  details(productId: number): Observable<ProductResponse> {
+    return this.http.get<ProductResponse>(this.apiUrl + `details?productId=${productId}`)
+  }
 }
