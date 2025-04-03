@@ -1,0 +1,194 @@
+@if (filter && products) {
+  <div class="breadcrumb-sort-row">
+    <div [routerLink]="'/'" class="breadcrumb">
+      <img src="assets/product-catalog/category-left-arr.svg" />
+      <h1>{{ filter.categoryName }}</h1>
+    </div>
+    <div class="sort">
+      <div
+        class="sort-btn"
+        (click)="toggle()"
+        [style.background-color]="sortOpen ? '#fff' : '#f2f2f2'"
+        (mousedown)="isPressed = true"
+        (mouseup)="isPressed = false"
+        [style.transform]="isPressed ? 'scale(0.96)' : 'scale(1)'"
+      >
+        <h4>{{ chosenSortType }}</h4>
+        <div [style.transform]="sortOpen ? 'rotate(180deg)' : 'rotate(0)'">
+          <img src="assets/product-catalog/selector-down-arr.svg" />
+        </div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="card-type-logo active"
+        [style.stroke]="cardType ? '#000' : '#ec5e2a'"
+        (click)="this.cardType = false"
+      >
+        <g stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity="0.5">
+          <path d="M9 22h6c5 0 7-2 7-7V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7M12 2v20M2 12h20"></path>
+        </g>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="card-type-logo"
+        [style.stroke]="cardType ? '#ec5e2a' : '#000'"
+        (click)="this.cardType = true"
+      >
+        <g stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" opacity="0.5">
+          <path d="M22 15V9c0-5-2-7-7-7H9C4 2 2 4 2 9v6c0 5 2 7 7 7h6c5 0 7-2 7-7M2 12h20"></path>
+        </g>
+      </svg>
+      <div
+        class="elements-wrapper"
+        [style.opacity]="this.sortOpen ? '1' : '0'"
+        [style.transform]="sortOpen ? 'translateY(0px)' : 'translateY(10px)'"
+      >
+        <div class="elements">
+          @for (elements of sortArray; track $index) {
+            <h4 (click)="sort($index)">
+              {{ sortArray[$index] }}
+            </h4>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-products-container">
+    <div class="filter">
+      <div class="top-row">
+        <div>
+          <h4>ფილტრი</h4>
+        </div>
+        <div>
+          <img src="/assets/product-catalog/clear.svg" />
+          <h4>გასუფთავება</h4>
+        </div>
+      </div>
+      <div class="filters">
+        <div class="price">
+          <div class="price-t">
+            <h4>ფასი</h4>
+          </div>
+          <div class="slider">
+            <ngx-slider
+              (userChangeStart)="onUserChangeStart($event)"
+              (userChange)="onUserChange($event)"
+              (userChangeEnd)="onUserChangeEnd($event)"
+              [(value)]="minPrice"
+              [(highValue)]="maxPrice"
+              [options]="options"
+            >
+            </ngx-slider>
+          </div>
+          <div class="prices">
+            <div class="price-min">
+              <h4>MIN:</h4>
+              <input type="number" [(ngModel)]="minPrice" (input)="validatePrice($event, 'min')" />
+              <div>₾</div>
+            </div>
+            <div class="price-max">
+              <h4>MAX:</h4>
+              <input type="number" [(ngModel)]="maxPrice" (input)="validatePrice($event, 'max')" />
+              <div>₾</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (products.length > 0) {
+      @if (!cardType) {
+        <div class="products">
+          @for (product of products; track $index) {
+            <div class="product-container">
+              <div class="product">
+                <a class="image">
+                  <img [src]="product.imageUrl" />
+                  @if (product.labelText) {
+                    <div class="best">{{ product.labelText }}</div>
+                  }
+                </a>
+                <div class="description">
+                  <div class="price">
+                    <h4 [style.color]="product.previousPrice ? '#ec5e2a' : '#000'">{{ product.price }} ₾</h4>
+                    @if (product.previousPrice) {
+                      <span>{{ product.previousPrice }} ₾</span>
+                    }
+                  </div>
+                  <p>
+                    თვეში:
+                    <span>{{ roundPrice(product.price) }} ₾</span>
+                    -დან
+                  </p>
+                  <a>{{ product.name }}</a>
+                </div>
+                <div class="buy">
+                  <div class="compare">
+                    <img src="assets/product-catalog/compare-card.svg" />
+                  </div>
+                  <div class="add">
+                    <img src="assets/product-catalog/cart-button.svg" />
+                    <h4>დამატება</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="product-list">
+          @for (product of products; track $index) {
+            <div class="product-container-list">
+              <div class="product-list">
+                <div class="image">
+                  <img [src]="product.imageUrl" />
+                </div>
+                <div class="wrapper">
+                  <div class="description">
+                    <a>{{ product.name }}</a>
+                    <div class="price">
+                      <h4 [style.color]="product.previousPrice ? '#ec5e2a' : '#000'">{{ product.price }} ₾</h4>
+                      @if (product.previousPrice) {
+                        <span>{{ product.previousPrice }} ₾</span>
+                      }
+                    </div>
+                    <p>
+                      თვეში:
+                      <span>{{ roundPrice(product.price) }} ₾</span>
+                      -დან
+                    </p>
+                  </div>
+                  <div class="buy">
+                    <div class="compare">
+                      <img src="assets/product-catalog/compare-card.svg" />
+                    </div>
+                    <div class="add">
+                      <img src="assets/product-catalog/cart-button.svg" />
+                      <h4>დამატება</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="separator"></div>
+            </div>
+          }
+        </div>
+      }
+    } @else {
+      <img
+        width="100%"
+        src="https://static.vecteezy.com/system/resources/previews/007/104/553/original/search-no-result-not-found-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-vector.jpg"
+        alt=""
+      />
+    }
+  </div>
+}

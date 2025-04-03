@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router'
 import { MainComponent } from './main/main.component'
-import { ProductDetailsComponent } from './product-details/product-details.component'
+import { ProductCatalogComponent } from './product-catalog/product-catalog.component'
 export const routes: Routes = [
   {
     path: '',
@@ -8,8 +8,8 @@ export const routes: Routes = [
     title: 'Zoommer.ge',
   },
   {
-    path: ':category/:id',
-    component: ProductDetailsComponent,
+    path: ':category',
+    component: ProductCatalogComponent,
     title: 'Zoommer.ge',
   },
 ]

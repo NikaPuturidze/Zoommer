@@ -1,36 +1,33 @@
-<div class="categories">
-  @for (category of categories; track $index) {
-    <div (mouseenter)="getCategory($index)" class="category-wrapper">
-      <div class="category">
-        <img [src]="category.img" [alt]="category.name" />
-        <span>{{ category.name }}</span>
-      </div>
-      @if ($index !== categories.length - 1) {
-        <div class="separator"></div>
-      }
-    </div>
-  }
-</div>
-<div
-  class="inner-content"
-  [style.height]="inside ? (viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter) : 0"
->
-  <div
-    class="content"
-    [style.height]="viewportWidth >= 1200 ? categories[cIndex].height : categories[cIndex].heightAfter"
-  >
-    @for (productsItem of categories[cIndex].categories; track $index) {
-      <div class="content-wrapper">
-        <h5 class="title">{{ productsItem.title }}</h5>
-        <ul>
-          @for (subCategory of productsItem.subCategories; track $index) {
-            <li class="sub-category">{{ subCategory }}</li>
-          }
-        </ul>
-
-        <span class="viewall">{{ productsItem.viewAll }}</span>
+@if (megaMenu && megaMenu[cIndex]) {
+  <div class="categories">
+    @for (category of megaMenu; track $index) {
+      <div (mouseenter)="getCategory($index)" class="category-wrapper">
+        <div class="category">
+          <img [src]="category.iconUrl" [alt]="category.name" />
+          <span>{{ category.name }}</span>
+        </div>
+        @if ($index !== megaMenu.length - 1) {
+          <div class="separator"></div>
+        }
       </div>
     }
-    <img class="thumb" [src]="categories[cIndex].thumbUrl" />
   </div>
-</div>
+  <div
+    class="inner-content"
+    [style.height]="inside ? (viewportWidth >= 1200 ? getHeightBefore() : getHeightBefore()) : 0"
+  >
+    <div class="content" [style.height]="viewportWidth >= 1200 ? getHeightBefore() : getHeightBefore()">
+      @for (productsItem of megaMenu[cIndex].childItems; track $index) {
+        <div class="content-wrapper">
+          <h5 class="title">{{ productsItem.name }}</h5>
+          <ul>
+            @for (subCategory of productsItem.childItems; track $index) {
+              <li [routerLink]="subCategory.route" class="sub-category">{{ subCategory.name }}</li>
+            }
+          </ul>
+        </div>
+      }
+      <img class="thumb" [src]="megaMenu[cIndex].imageUrl" />
+    </div>
+  </div>
+}

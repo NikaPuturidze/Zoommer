@@ -8,7 +8,7 @@ button {
 :host {
   display: flex;
   height: 340px;
-  gap: 40px;
+  gap: 30px;
 
   &:last-child {
     overflow-x: hidden;
@@ -29,7 +29,7 @@ button {
       transition: all 600ms ease;
       gap: 30px;
       height: inherit;
-      max-width: 884px;
+      max-width: 894px;
 
       img {
         border-radius: 12px;
@@ -37,7 +37,7 @@ button {
         cursor: pointer;
 
         &:first-child {
-          min-width: 884px;
+          min-width: 894px;
         }
       }
     }

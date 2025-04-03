@@ -1,4 +1,4 @@
-packages:
-  - backend
-  - webapp
-  - shared
+packages: 
+- backend
+- webapp
+- shared
