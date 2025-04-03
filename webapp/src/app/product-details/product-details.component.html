@@ -24,33 +24,59 @@
           <div class="heart">
             <img src="assets/product-details/heart.svg" alt="heart" />
           </div>
-          <div
-            class="previous-img arrow"
-            (click)="previousImg()"
-            [style.visibility]="imageIndex == 0 ? 'hidden' : 'visible'"
-          >
-            <img src="assets/product-details/slider-left-btn.svg" alt="left-btn" />
-          </div>
-          <div class="slider-wrapper">
+          <div class="slider-wrapper" (click)="toggleSlider()">
             <div class="images" [style.transform]="translateX">
               @for (imgPath of product.images; track $index) {
-                <img [src]="imgPath" />
+                <div>
+                  <img [src]="imgPath" width="400" height="230" />
+                </div>
               }
             </div>
           </div>
-          <div
-            class="next-img arrow"
-            (click)="nextImg()"
-            [style.visibility]="imageIndex == product.images.length - 1 ? 'hidden' : 'visible'"
-          >
-            <img src="assets/product-details/slider-right-btn.svg" alt="right-btn" />
-          </div>
         </div>
+        @if (sliderOpen) {
+          <div class="slider-popup" (click)="toggleSlider()">
+            <div class="popup" (click)="$event.stopPropagation()">
+              <img class="ext" (click)="toggleSlider()" src="assets/product-details/mobile-modal-close.svg" />
+              <img class="left-arr" (click)="previousImgPopup()" src="assets/product-details/right-path-orange.svg" />
+              <img class="left-right" (click)="nextImgPopup()" src="assets/product-details/right-path-orange.svg" />
+              <div class="main-p-slider">
+                <div class="slider-wrapper">
+                  <div class="images" [style.transform]="translateXPopup">
+                    @for (imgPath of product.images; track $index) {
+                      <div>
+                        <img [src]="imgPath" />
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              <div class="bottom-p-slider">
+                @for (imgPath of product.images; track $index) {
+                  <div
+                    (click)="moveToSpecific($index, true)"
+                    class="image"
+                    [style.border]="imageIndexPopup == $index ? '1px solid red' : '1px solid #eaeaea'"
+                  >
+                    <img [src]="imgPath" />
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
         <div class="all-image-slider">
+          <img
+            (click)="previousImg()"
+            [style.visibility]=""
+            class="left-arr"
+            src="assets/product-details/slider-left-btn.svg"
+          />
+          <img (click)="nextImg()" class="right-arr" src="assets/product-details/slider-right-btn.svg" />
           @for (imgPath of product.images; track $index) {
             <div
+              (click)="moveToSpecific($index, false)"
               class="image"
-              (click)="getIndex($index)"
               [style.border]="imageIndex == $index ? '1px solid red' : 'none'"
             >
               <img [src]="imgPath" />
@@ -73,7 +99,7 @@
               <div class="color">
                 <div class="current-color">
                   <h4>
-                    ფერი: <span>{{ spec.specificationMeaning }}</span>
+                    {{ spec.specificationName }}: <span>{{ spec.specificationMeaning }}</span>
                   </h4>
                 </div>
                 <div class="colors">
@@ -91,13 +117,13 @@
 
           @for (spec of product.keySpecification; track $index) {
             @if (!spec.isColor) {
-              <div class="memory">
-                <div class="current-memory">
+              <div class="key-spec">
+                <div class="current-spec">
                   <h4>
-                    შიდა მეხსიერება: <span>{{ spec.specificationMeaning }}</span>
+                    {{ spec.specificationName }}: <span>{{ spec.specificationMeaning }}</span>
                   </h4>
                 </div>
-                <div class="memories">
+                <div class="specs">
                   @for (memory of spec.specificationMeaningsList; track $index) {
                     <div
                       [routerLink]="'/' + memory.route"
@@ -121,7 +147,10 @@
   <aside>
     <div class="aside-wrapper">
       <div class="price">
-        <h4>{{ product.price }} ₾</h4>
+        <div class="price-m">
+          <h4 class="bf">{{ product.price }} ₾</h4>
+          <h4 class="aft">{{ product.previousPrice }} ₾</h4>
+        </div>
         <p>
           თვეში: <span>{{ (product.price / 36).toFixed(1) }} ₾</span> -დან
         </p>
