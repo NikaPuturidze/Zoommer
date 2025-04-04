@@ -56,7 +56,7 @@
                   <div
                     (click)="moveToSpecific($index, true)"
                     class="image"
-                    [style.border]="imageIndexPopup == $index ? '1px solid red' : '1px solid #eaeaea'"
+                    [style.border]="imageIndexPopup == $index ? '1px solid #ec5e2a' : '1px solid #eaeaea'"
                   >
                     <img [src]="imgPath" />
                   </div>
@@ -67,17 +67,22 @@
         }
         <div class="all-image-slider">
           <img
-            [style.visibility]=""
+            [style.visibility]="imageIndex == 0 ? 'hidden' : 'visible'"
             (click)="previousImg(false)"
             class="left-arr"
             src="assets/product-details/slider-left-btn.svg"
           />
-          <img (click)="nextImg(false)" class="right-arr" src="assets/product-details/slider-right-btn.svg" />
+          <img
+            [style.visibility]="imageIndex == product.images.length - 1 ? 'hidden' : 'visible'"
+            (click)="nextImg(false)"
+            class="right-arr"
+            src="assets/product-details/slider-right-btn.svg"
+          />
           @for (imgPath of product.images; track $index) {
             <div
               (click)="moveToSpecific($index, false)"
               class="image"
-              [style.border]="imageIndex == $index ? '1px solid red' : 'none'"
+              [style.border]="imageIndex == $index ? '1px solid #ec5e2a' : 'none'"
             >
               <img [src]="imgPath" />
             </div>
@@ -143,13 +148,76 @@
         </div>
       </div>
     </div>
+    <div class="bundles">
+      <div class="bundles-row">
+        <h4>ერთად იაფია</h4>
+        <div class="add-item">
+          <img src="assets/product-details/add-item.svg" />
+          <h5>დაამატე ნივთი</h5>
+        </div>
+      </div>
+      <div class="bundle-products">
+        <div class="b-product">
+          <img class="b-product-image" [src]="product.imageUrl" />
+          <div class="b-product-info">
+            <h4>{{ product.name }}</h4>
+            <div class="b-product-price">
+              <h4>{{ product.price }} ₾</h4>
+            </div>
+          </div>
+        </div>
+
+        @for (bundle of product.bundles; track $index) {
+          <div class="bundle-product">
+            <a class="image-wrapper" [routerLink]="'/' + bundle.route">
+              <img class="bundle-image" [src]="bundle.productUrl" />
+            </a>
+            <div class="bundle-info">
+              <a [routerLink]="'/' + bundle.route" class="bundle-name">
+                <h4>{{ bundle.productName }}</h4>
+              </a>
+              <div class="bundle-price">
+                <h4>{{ bundle.productSalePrice }} ₾</h4>
+                @if (bundle.productPrice) {
+                  <h5 class="previous-price">{{ bundle.productPrice }} ₾</h5>
+                }
+              </div>
+            </div>
+            <div class="bundle-icons">
+              <img (click)="removeBundle($index)" src="assets/product-details/remove-grey.svg" />
+              <img src="assets/product-details/edit-grey.svg" />
+            </div>
+          </div>
+        }
+
+        <div class="bundle-buy">
+          <div class="bundle-price-sum">
+            <h4 class="total">ჯამური ფასი ({{ product.bundles.length }})</h4>
+            <div class="bundle-total-price">
+              <h3 class="btp-sale">{{ bundleTotalSalePrice }} ₾</h3>
+              <h4 class="btp-total">{{ bundleTotalPrice }} ₾</h4>
+            </div>
+          </div>
+          <div class="bundle-buy-btns">
+            <div class="cart">
+              <img src="assets/product-details/cart-small.svg" />
+            </div>
+            <div class="bundle-buy-btn">
+              <h4 class="bbb-text">ყიდვა</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <aside>
     <div class="aside-wrapper">
       <div class="price">
         <div class="price-m">
           <h4 class="bf">{{ product.price }} ₾</h4>
-          <h4 class="aft">{{ product.previousPrice }} ₾</h4>
+          @if (product.previousPrice) {
+            <h4 class="af">{{ product.previousPrice }} ₾</h4>
+          }
         </div>
         <p>
           თვეში: <span>{{ (product.price / 36).toFixed(1) }} ₾</span> -დან

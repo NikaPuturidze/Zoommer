@@ -21,6 +21,8 @@ export class ProductDetailsComponent implements OnInit {
   public toMove = 0
   public toMovePopup = 0
   public sliderOpen = false
+  public bundleTotalPrice = 0
+  public bundleTotalSalePrice = 0
 
   constructor(
     private apiService: ApiService,
@@ -63,11 +65,31 @@ export class ProductDetailsComponent implements OnInit {
       this.product = this.productResponse.product
       this.refreshComponent()
       this.titleService.setTitle(this.product.metaTitle || this.product.name)
+      this.bundleTotalSalePrice = product.product.price
+      this.bundleTotalPrice = this.bundleTotalSalePrice
+      this.product.bundles.forEach((bundle) => {
+        this.bundleTotalSalePrice += bundle.productSalePrice
+      })
+      this.product.bundles.forEach((bundle) => {
+        this.bundleTotalPrice += bundle.productPrice
+      })
     })
+  }
+
+  removeBundle(index: number) {
+    this.bundleTotalSalePrice -= this.product.bundles[index].productSalePrice
+    this.bundleTotalPrice -= this.product.bundles[index].productPrice
+    this.product.bundles.splice(index, 1)
   }
 
   toggleSlider() {
     this.sliderOpen = !this.sliderOpen
+
+    if (this.sliderOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
   }
 
   nextImg(isPopup: boolean) {
