@@ -16,6 +16,5 @@ export const routes: Routes = [
   {
     path: ':category/:product',
     component: ProductDetailsComponent,
-    title: 'Zoommer.ge',
   },
 ]

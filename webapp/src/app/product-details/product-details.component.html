@@ -38,8 +38,8 @@
           <div class="slider-popup" (click)="toggleSlider()">
             <div class="popup" (click)="$event.stopPropagation()">
               <img class="ext" (click)="toggleSlider()" src="assets/product-details/mobile-modal-close.svg" />
-              <img class="left-arr" (click)="previousImgPopup()" src="assets/product-details/right-path-orange.svg" />
-              <img class="left-right" (click)="nextImgPopup()" src="assets/product-details/right-path-orange.svg" />
+              <img class="left-arr" (click)="previousImg(true)" src="assets/product-details/right-path-orange.svg" />
+              <img class="left-right" (click)="nextImg(true)" src="assets/product-details/right-path-orange.svg" />
               <div class="main-p-slider">
                 <div class="slider-wrapper">
                   <div class="images" [style.transform]="translateXPopup">
@@ -67,12 +67,12 @@
         }
         <div class="all-image-slider">
           <img
-            (click)="previousImg()"
             [style.visibility]=""
+            (click)="previousImg(false)"
             class="left-arr"
             src="assets/product-details/slider-left-btn.svg"
           />
-          <img (click)="nextImg()" class="right-arr" src="assets/product-details/slider-right-btn.svg" />
+          <img (click)="nextImg(false)" class="right-arr" src="assets/product-details/slider-right-btn.svg" />
           @for (imgPath of product.images; track $index) {
             <div
               (click)="moveToSpecific($index, false)"

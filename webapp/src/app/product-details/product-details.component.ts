@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ApiService } from '../api.service'
 import { Product, ProductResponse } from '@zoommer/shared/interfaces/product.interface'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-product-details',
@@ -22,16 +23,16 @@ export class ProductDetailsComponent implements OnInit {
   public sliderOpen = false
 
   constructor(
-    public apiService: ApiService,
-    public router: Router,
-    public actR: ActivatedRoute
+    private apiService: ApiService,
+    private titleService: Title,
+    private router: Router,
+    private actR: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.actR.url.subscribe(() => {
       this.getId()
       this.fetchProduct()
-      this.sliderOpen = false
     })
   }
 
@@ -46,46 +47,58 @@ export class ProductDetailsComponent implements OnInit {
     )
   }
 
+  refreshComponent() {
+    this.imageIndex = 0
+    this.imageIndexPopup = 0
+    this.translateX = ''
+    this.translateXPopup = ''
+    this.toMove = 0
+    this.toMovePopup = 0
+    this.sliderOpen = false
+  }
+
   fetchProduct() {
     this.apiService.details(this.id).subscribe((product) => {
       this.productResponse = product
       this.product = this.productResponse.product
+      this.refreshComponent()
+      this.titleService.setTitle(this.product.metaTitle || this.product.name)
     })
-  }
-
-  nextImg() {
-    if (this.imageIndex < this.product.images.length - 1) {
-      this.imageIndex++
-      this.toMove -= 100
-      this.translateX = `translateX(${this.toMove}%)`
-    }
-  }
-
-  previousImg() {
-    if (this.imageIndex > 0) {
-      this.imageIndex--
-      this.toMove += 100
-      this.translateX = `translateX(${this.toMove}%)`
-    }
   }
 
   toggleSlider() {
     this.sliderOpen = !this.sliderOpen
   }
 
-  nextImgPopup() {
-    if (this.imageIndexPopup < this.product.images.length - 1) {
-      this.imageIndexPopup++
-      this.toMovePopup -= 100
-      this.translateXPopup = `translateX(${this.toMovePopup}%)`
+  nextImg(isPopup: boolean) {
+    if (!isPopup) {
+      if (this.imageIndex < this.product.images.length - 1) {
+        this.imageIndex++
+        this.toMove -= 100
+        this.translateX = `translateX(${this.toMove}%)`
+      }
+    } else {
+      if (this.imageIndexPopup < this.product.images.length - 1) {
+        this.imageIndexPopup++
+        this.toMovePopup -= 100
+        this.translateXPopup = `translateX(${this.toMovePopup}%)`
+      }
     }
   }
 
-  previousImgPopup() {
-    if (this.imageIndexPopup > 0) {
-      this.imageIndexPopup--
-      this.toMovePopup += 100
-      this.translateXPopup = `translateX(${this.toMovePopup}%)`
+  previousImg(isPopup: boolean) {
+    if (!isPopup) {
+      if (this.imageIndex > 0) {
+        this.imageIndex--
+        this.toMove += 100
+        this.translateX = `translateX(${this.toMove}%)`
+      }
+    } else {
+      if (this.imageIndexPopup > 0) {
+        this.imageIndexPopup--
+        this.toMovePopup += 100
+        this.translateXPopup = `translateX(${this.toMovePopup}%)`
+      }
     }
   }
 
@@ -94,17 +107,17 @@ export class ProductDetailsComponent implements OnInit {
       let step = to - this.imageIndexPopup
 
       if (step > 0) {
-        while (step--) this.nextImgPopup()
+        while (step--) this.nextImg(popup)
       } else {
-        while (step++) this.previousImgPopup()
+        while (step++) this.previousImg(popup)
       }
     } else {
       let step = to - this.imageIndex
 
       if (step > 0) {
-        while (step--) this.nextImg()
+        while (step--) this.nextImg(popup)
       } else {
-        while (step++) this.previousImg()
+        while (step++) this.previousImg(popup)
       }
     }
   }
