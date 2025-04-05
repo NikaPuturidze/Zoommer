@@ -18,11 +18,11 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   public imageIndex = 0
   public imageIndexPopup = 0
   public imageIndexAccesory = 0
-  public imageIndexSimmilar = 0
+  public imageIndexSimilar = 0
   public translateX = 0
   public translateXPopup = 0
   public translateXAccesory = 0
-  public translateXSimmilar = 0
+  public translateXSimilar = 0
   public bundleTotalPrice = 0
   public bundleTotalSalePrice = 0
   public showMore = true
@@ -84,11 +84,11 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   refreshComponent() {
     this.imageIndex = 0
     this.imageIndexPopup = 0
-    this.imageIndexSimmilar = 0
+    this.imageIndexSimilar = 0
     this.imageIndexAccesory = 0
     this.translateX = 0
     this.translateXPopup = 0
-    this.translateXSimmilar = 0
+    this.translateXSimilar = 0
     this.translateXAccesory = 0
     this.sliderOpen = false
   }
@@ -192,16 +192,16 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   }
 
   nextSimmilar() {
-    if (this.imageIndexSimmilar < this.product.similarProductsList.length - 4) {
-      this.imageIndexSimmilar++
-      this.translateXSimmilar -= (180 / 730) * 100
+    if (this.imageIndexSimilar < this.product.similarProductsList.length - 4) {
+      this.imageIndexSimilar++
+      this.translateXSimilar -= (180 / 730) * 100
     }
   }
 
   previousSimmilar() {
-    if (this.imageIndexSimmilar > 0) {
-      this.imageIndexSimmilar--
-      this.translateXSimmilar += (180 / 730) * 100
+    if (this.imageIndexSimilar > 0) {
+      this.imageIndexSimilar--
+      this.translateXSimilar += (180 / 730) * 100
     }
   }
 

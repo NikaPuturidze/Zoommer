@@ -999,14 +999,14 @@
       }
     }
 
-    #simmilar {
+    #similar {
       width: 100%;
       margin-top: 30px;
       border-top: 2px solid $gray-primary;
       padding-top: 30px;
       position: relative;
 
-      .simmilar-title {
+      .similar-title {
         display: flex;
         justify-content: space-between;
 
@@ -1020,12 +1020,12 @@
         }
       }
 
-      .simmilar-slider {
+      .similar-slider {
         overflow: hidden;
         width: 730px;
         margin-top: 30px;
 
-        .simmilar-slider-wrapper {
+        .similar-slider-wrapper {
           display: flex;
           position: relative;
           width: 100%;
@@ -1033,11 +1033,11 @@
           z-index: 1;
           transition: transform 0.6s ease;
 
-          .simmilar-container {
+          .similar-container {
             flex-shrink: 0;
             margin-right: 20px !important;
 
-            .simmilar {
+            .similar {
               display: flex;
               flex-direction: column;
               position: relative;
