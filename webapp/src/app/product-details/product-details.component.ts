@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren, AfterViewInit } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ApiService } from '../api.service'
 import { Product, ProductResponse } from '@zoommer/shared/interfaces/product.interface'
@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser'
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, AfterViewInit {
   private id!: number
   public productResponse!: ProductResponse
   public product!: Product
@@ -25,19 +25,49 @@ export class ProductDetailsComponent implements OnInit {
   public translateXSimmilar = 0
   public bundleTotalPrice = 0
   public bundleTotalSalePrice = 0
+  public showMore = true
+  public tableHeights: number[] = []
+  public isViewReady = false
 
   constructor(
     private apiService: ApiService,
     private titleService: Title,
     private router: Router,
-    private actR: ActivatedRoute
+    private actR: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {}
+
+  @ViewChildren('tableWrapper') tableWrapper!: QueryList<ElementRef>
 
   ngOnInit(): void {
     this.actR.url.subscribe(() => {
       this.getId()
       this.fetchProduct()
     })
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.collectTableHeights()
+      this.isViewReady = true
+
+      this.cdr.detectChanges()
+    })
+
+    this.tableWrapper.changes.subscribe(() => {
+      this.collectTableHeights()
+      this.cdr.detectChanges()
+    })
+  }
+
+  collectTableHeights() {
+    if (!this.tableWrapper?.length) return
+
+    this.tableHeights = this.tableWrapper.map((wrapper) => wrapper.nativeElement.offsetHeight)
+  }
+
+  totalTableHeight(): string {
+    return `${this.tableHeights.reduce((a, b) => a + b, 0) * 2 - this.tableHeights.length * 35 - 160}px`
   }
 
   getId() {
@@ -76,6 +106,9 @@ export class ProductDetailsComponent implements OnInit {
       })
       this.product.bundles.forEach((bundle) => {
         this.bundleTotalPrice += bundle.productPrice
+      })
+      product.product.specificationGroup.forEach((group) => {
+        group.isActive = true
       })
     })
   }

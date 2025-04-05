@@ -91,6 +91,7 @@ export interface SpecificationGroup {
   id: number
   groupName: string
   orderNo: number
+  isActive: boolean | null
   specifications: Specification[]
 }
 

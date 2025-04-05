@@ -221,9 +221,11 @@
             <h4>მსაგვსი</h4>
           </a>
         }
-        <a>
-          <h4>მახასიათებლები</h4>
-        </a>
+        @if (product.specificationGroup.length > 0) {
+          <a (click)="scrollTo('specifications')">
+            <h4>მახასიათებლები</h4>
+          </a>
+        }
         <a>
           <h4>განხილვა</h4>
         </a>
@@ -339,6 +341,62 @@
         </div>
       </div>
     }
+    <div id="specifications">
+      <div class="specifications-title">
+        <h4>დამატებითი მახასიათებლები</h4>
+      </div>
+      @if (isViewReady) {
+        <div
+          class="specification-list"
+          [class.active]="!showMore"
+          [style.height]="showMore ? totalTableHeight() : '400px'"
+        >
+          @for (specifications of product.specificationGroup; track $index) {
+            <div class="specification" [style.marginBottom]="specifications.isActive ? '35px' : '10px'">
+              <div class="spec-title">
+                <h4>{{ specifications.groupName }}</h4>
+                <img
+                  (click)="specifications.isActive = !specifications.isActive"
+                  src="assets/product-details/arrow-up-black.svg"
+                  [style.transform]="specifications.isActive ? 'rotate(180deg)' : 'rotate(0deg)'"
+                />
+              </div>
+
+              <div
+                #tableWrapper
+                class="table-wrapper"
+                [style.height]="specifications.isActive ? `${tableHeights[$index]}px` : '0px'"
+              >
+                <table class="table">
+                  @for (specifiation of specifications.specifications; track $index) {
+                    <tbody class="table-body">
+                      <tr class="table-row">
+                        <td class="spec-name">
+                          <h4>{{ specifiation.specificationName }}</h4>
+                        </td>
+                        <td class="spec-meaning">
+                          <h4>{{ specifiation.specificationMeaning }}</h4>
+                        </td>
+                      </tr>
+                    </tbody>
+                  }
+                </table>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <div class="see-more" (click)="showMore = !showMore">
+        @if (showMore) {
+          <h4>მეტის ნახვა</h4>
+          <img src="assets/product-details/arrow-down-orange.svg" />
+        } @else {
+          <h4>აკეცვა</h4>
+          <img [style.transform]="'rotate(180deg)'" src="assets/product-details/arrow-down-orange.svg" />
+        }
+      </div>
+    </div>
   </section>
   <aside>
     <div class="aside-wrapper">
