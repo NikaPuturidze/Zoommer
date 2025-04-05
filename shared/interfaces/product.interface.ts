@@ -47,7 +47,7 @@ export interface Product {
   specificationGroup: SpecificationGroup[]
   mainSpecification: MainSpecification[]
   keySpecification: any[]
-  similarProductsList: any[]
+  similarProductsList: similarProductsList[]
   bundles: Bundle[]
   accessories: Accessory[]
   bundleTotalPreviousPrice: number
@@ -201,6 +201,24 @@ export interface Accessory {
   labelColor?: string
   labelText?: string
   iconUrl?: string
+}
+
+export interface similarProductsList {
+  disableBuyButtom: boolean
+  iconUrl: string | null
+  imageUrls: string[]
+  isFavorite: boolean
+  isInCart: boolean
+  labelColor: string | null
+  labelText: string | null
+  onSaleSoon: boolean
+  previousPrice: string | null
+  price: number
+  productId: number
+  productName: string
+  requestedQuantity: number
+  route: string
+  storageQuantity: number
 }
 
 export interface Breadcrumb {

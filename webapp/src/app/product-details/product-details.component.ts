@@ -18,9 +18,11 @@ export class ProductDetailsComponent implements OnInit {
   public imageIndex = 0
   public imageIndexPopup = 0
   public imageIndexAccesory = 0
+  public imageIndexSimmilar = 0
   public translateX = 0
   public translateXPopup = 0
   public translateXAccesory = 0
+  public translateXSimmilar = 0
   public bundleTotalPrice = 0
   public bundleTotalSalePrice = 0
 
@@ -52,8 +54,12 @@ export class ProductDetailsComponent implements OnInit {
   refreshComponent() {
     this.imageIndex = 0
     this.imageIndexPopup = 0
+    this.imageIndexSimmilar = 0
+    this.imageIndexAccesory = 0
     this.translateX = 0
     this.translateXPopup = 0
+    this.translateXSimmilar = 0
+    this.translateXAccesory = 0
     this.sliderOpen = false
   }
 
@@ -149,6 +155,20 @@ export class ProductDetailsComponent implements OnInit {
     if (this.imageIndexAccesory > 0) {
       this.imageIndexAccesory--
       this.translateXAccesory += 25
+    }
+  }
+
+  nextSimmilar() {
+    if (this.imageIndexSimmilar < this.product.similarProductsList.length - 4) {
+      this.imageIndexSimmilar++
+      this.translateXSimmilar -= (180 / 730) * 100
+    }
+  }
+
+  previousSimmilar() {
+    if (this.imageIndexSimmilar > 0) {
+      this.imageIndexSimmilar--
+      this.translateXSimmilar += (180 / 730) * 100
     }
   }
 
