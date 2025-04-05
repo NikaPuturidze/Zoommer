@@ -25,7 +25,7 @@
             <img src="assets/product-details/heart.svg" alt="heart" />
           </div>
           <div class="slider-wrapper" (click)="toggleSlider()">
-            <div class="images" [style.transform]="translateX">
+            <div class="images" [style.transform]="'translateX(' + translateX + '%)'">
               @for (imgPath of product.images; track $index) {
                 <div>
                   <img [src]="imgPath" width="400" height="230" />
@@ -42,7 +42,7 @@
               <img class="left-right" (click)="nextImg(true)" src="assets/product-details/right-path-orange.svg" />
               <div class="main-p-slider">
                 <div class="slider-wrapper">
-                  <div class="images" [style.transform]="translateXPopup">
+                  <div class="images" [style.transform]="'translateX(' + translateXPopup + '%)'">
                     @for (imgPath of product.images; track $index) {
                       <div>
                         <img [src]="imgPath" />
@@ -207,6 +207,76 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="sections-row">
+      <div class="row-wrapper">
+        <a (click)="scrollTo('accessories')">
+          <h4>აქსესუარები</h4>
+        </a>
+        <a>
+          <h4>მსგავსი</h4>
+        </a>
+        <a>
+          <h4>მახასიათებლები</h4>
+        </a>
+        <a>
+          <h4>განხილვა</h4>
+        </a>
+        <a>
+          <h4>ფილიალები</h4>
+        </a>
+      </div>
+    </div>
+    <div id="accessories">
+      <div class="accessories-slider">
+        <div class="accessories-slider-wrapper" [style.transform]="'translateX(' + translateXAccesory + '%)'">
+          @for (accessory of product.accessories; track $index) {
+            <div class="accessory-container">
+              <div class="accessory">
+                <a [routerLink]="'/' + accessory.route" class="image">
+                  <img [src]="accessory.productUrl" />
+                  @if (product.labelText) {
+                    <div class="best">{{ accessory.labelText }}</div>
+                  }
+                </a>
+                <div
+                  [routerLink]="'/' + accessory.route"
+                  class="description"
+                  [style.justifyContent]="roundPrice(accessory.productPrice) > 0 ? 'flex-start' : 'space-between'"
+                >
+                  <div class="price">
+                    <h4 [style.color]="accessory.productSalePrice ? '#ec5e2a' : '#000'">
+                      {{ accessory.productPrice }} ₾
+                    </h4>
+                    @if (accessory.productSalePrice) {
+                      <span>{{ accessory.productPrice }} ₾</span>
+                    }
+                  </div>
+                  @if (roundPrice(accessory.productPrice) > 0) {
+                    <p>
+                      თვეში:
+                      <span>{{ roundPrice(accessory.productPrice) }} ₾</span>
+                      -დან
+                    </p>
+                  }
+                  <a>{{ accessory.productName }}</a>
+                </div>
+                <div class="buy">
+                  <div class="compare">
+                    <img src="assets/product-catalog/compare-card.svg" />
+                  </div>
+                  <div class="add">
+                    <img src="assets/product-catalog/cart-button.svg" />
+                    <h4>დამატება</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        <img class="arr-left" (click)="previousAccessory()" src="assets/product-details/slider-left-btn.svg" />
+        <img class="arr-right" (click)="nextAccessory()" src="assets/product-details/slider-right-btn.svg" />
       </div>
     </div>
   </section>

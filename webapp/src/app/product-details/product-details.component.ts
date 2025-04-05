@@ -14,13 +14,13 @@ export class ProductDetailsComponent implements OnInit {
   private id!: number
   public productResponse!: ProductResponse
   public product!: Product
+  public sliderOpen = false
   public imageIndex = 0
   public imageIndexPopup = 0
-  public translateX = ''
-  public translateXPopup = ''
-  public toMove = 0
-  public toMovePopup = 0
-  public sliderOpen = false
+  public imageIndexAccesory = 0
+  public translateX = 0
+  public translateXPopup = 0
+  public translateXAccesory = 0
   public bundleTotalPrice = 0
   public bundleTotalSalePrice = 0
 
@@ -52,10 +52,8 @@ export class ProductDetailsComponent implements OnInit {
   refreshComponent() {
     this.imageIndex = 0
     this.imageIndexPopup = 0
-    this.translateX = ''
-    this.translateXPopup = ''
-    this.toMove = 0
-    this.toMovePopup = 0
+    this.translateX = 0
+    this.translateXPopup = 0
     this.sliderOpen = false
   }
 
@@ -96,14 +94,12 @@ export class ProductDetailsComponent implements OnInit {
     if (!isPopup) {
       if (this.imageIndex < this.product.images.length - 1) {
         this.imageIndex++
-        this.toMove -= 100
-        this.translateX = `translateX(${this.toMove}%)`
+        this.translateX -= 100
       }
     } else {
       if (this.imageIndexPopup < this.product.images.length - 1) {
         this.imageIndexPopup++
-        this.toMovePopup -= 100
-        this.translateXPopup = `translateX(${this.toMovePopup}%)`
+        this.translateXPopup -= 100
       }
     }
   }
@@ -112,14 +108,12 @@ export class ProductDetailsComponent implements OnInit {
     if (!isPopup) {
       if (this.imageIndex > 0) {
         this.imageIndex--
-        this.toMove += 100
-        this.translateX = `translateX(${this.toMove}%)`
+        this.translateX += 100
       }
     } else {
       if (this.imageIndexPopup > 0) {
         this.imageIndexPopup--
-        this.toMovePopup += 100
-        this.translateXPopup = `translateX(${this.toMovePopup}%)`
+        this.translateXPopup += 100
       }
     }
   }
@@ -142,5 +136,27 @@ export class ProductDetailsComponent implements OnInit {
         while (step++) this.previousImg(popup)
       }
     }
+  }
+
+  nextAccessory() {
+    if (this.imageIndexAccesory < this.product.accessories.length - 4) {
+      this.imageIndexAccesory++
+      this.translateXAccesory -= 25
+    }
+  }
+
+  previousAccessory() {
+    if (this.imageIndexAccesory > 0) {
+      this.imageIndexAccesory--
+      this.translateXAccesory += 25
+    }
+  }
+
+  scrollTo(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  roundPrice(price: number) {
+    return Math.floor(price / 36)
   }
 }
