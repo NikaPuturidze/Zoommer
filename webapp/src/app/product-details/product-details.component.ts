@@ -31,6 +31,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   public specificationHeight: number[] = []
   public tableHeightsAfter: number[] = []
   public isViewReady = false
+  public warrantyOpen = false
 
   constructor(
     private apiService: ApiService,
@@ -232,5 +233,19 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
 
   roundPrice(price: number) {
     return Math.floor(price / 36)
+  }
+
+  openExternalLink(link: string) {
+    window.open(link, '_blank')
+  }
+
+  toggleWarranty() {
+    this.warrantyOpen = !this.warrantyOpen
+
+    if (this.warrantyOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
   }
 }
