@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren, AfterViewInit } from '@angular/core'
 import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ApiService } from '../api.service'
-import { Product, ProductResponse } from '@zoommer/shared/interfaces/product.interface'
+import { availabilityInStores, Product, ProductResponse } from '@zoommer/shared/interfaces/product.interface'
 import { Title } from '@angular/platform-browser'
 import { ScaleOnClickDirective } from '../shared/directives/scale-on-click.directive'
 
@@ -14,6 +14,7 @@ import { ScaleOnClickDirective } from '../shared/directives/scale-on-click.direc
 export class ProductDetailsComponent implements OnInit, AfterViewInit {
   private id!: number
   public productResponse!: ProductResponse
+  public availabilityInStores!: availabilityInStores
   public product!: Product
   public sliderOpen = false
   public imageIndex = 0
@@ -120,6 +121,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     this.apiService.details(this.id).subscribe((product) => {
       this.productResponse = product
       this.product = this.productResponse.product
+      this.availabilityInStores = this.productResponse.availabilityInStores
       this.refreshComponent()
       this.bundleTotalSalePrice = product.product.price
       this.bundleTotalPrice = this.bundleTotalSalePrice

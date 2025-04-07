@@ -1,6 +1,17 @@
 export interface ProductResponse extends Object {
   product: Product
-  availabilityInStores: Array<Object>
+  availabilityInStores: availabilityInStores
+}
+
+export interface availabilityInStores {
+  address: string
+  branchName: string
+  city: string
+  id: number
+  inStock: boolean
+  phoneNumber: string
+  workingHoursMonToSat: string
+  workingHoursSun: string
 }
 
 export interface Product {
