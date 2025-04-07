@@ -348,7 +348,7 @@
       @if (isViewReady) {
         <div class="spec-wrapper">
           <div class="see-more-wrapper">
-            <div class="see-more" (click)="showMore = !showMore">
+            <div appScaleOnClick class="see-more" (click)="showMore = !showMore">
               @if (showMore) {
                 <h4>აკეცვა</h4>
                 <img [style.transform]="'rotate(180deg)'" src="assets/product-details/arrow-down-orange.svg" />

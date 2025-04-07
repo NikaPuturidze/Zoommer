@@ -5,14 +5,7 @@
       <h1>{{ filter.categoryName }}</h1>
     </div>
     <div class="sort">
-      <div
-        class="sort-btn"
-        (click)="toggle()"
-        [style.background-color]="sortOpen ? '#fff' : '#f2f2f2'"
-        (mousedown)="isPressed = true"
-        (mouseup)="isPressed = false"
-        [style.transform]="isPressed ? 'scale(0.96)' : 'scale(1)'"
-      >
+      <div appScaleOnClick class="sort-btn" (click)="toggle()" [style.background-color]="sortOpen ? '#fff' : '#f2f2f2'">
         <h4>{{ chosenSortType }}</h4>
         <div [style.transform]="sortOpen ? 'rotate(180deg)' : 'rotate(0)'">
           <img src="assets/product-catalog/selector-down-arr.svg" />

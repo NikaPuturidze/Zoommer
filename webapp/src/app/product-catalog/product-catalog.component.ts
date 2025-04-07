@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms'
 import { Product } from '@zoommer/shared/interfaces/product-catalog.interface'
 import { ProductResponse } from '@zoommer/shared/interfaces/product.interface'
 import { Filter } from '@zoommer/shared/interfaces/filter.interface'
+import { ScaleOnClickDirective } from '../shared/directives/scale-on-click.directive'
 
 interface QueryParams {
   minPrice?: number
@@ -16,7 +17,7 @@ interface QueryParams {
 
 @Component({
   selector: 'app-product-catalog',
-  imports: [RouterModule, FormsModule, NgxSliderModule],
+  imports: [RouterModule, FormsModule, NgxSliderModule, ScaleOnClickDirective],
   templateUrl: './product-catalog.component.html',
   styleUrl: './product-catalog.component.scss',
 })
@@ -26,7 +27,6 @@ export class ProductCatalogComponent implements OnInit {
   public products!: Product[]
   public sortOpen = false
   public cardType = false
-  public isPressed = false
   public options!: Options
   public minPrice!: number
   public maxPrice!: number

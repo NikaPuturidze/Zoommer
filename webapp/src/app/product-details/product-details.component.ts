@@ -3,10 +3,11 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router'
 import { ApiService } from '../api.service'
 import { Product, ProductResponse } from '@zoommer/shared/interfaces/product.interface'
 import { Title } from '@angular/platform-browser'
+import { ScaleOnClickDirective } from '../shared/directives/scale-on-click.directive'
 
 @Component({
   selector: 'app-product-details',
-  imports: [RouterModule],
+  imports: [RouterModule, ScaleOnClickDirective],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
