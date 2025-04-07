@@ -1,6 +1,6 @@
 export interface ProductResponse extends Object {
   product: Product
-  availabilityInStores: availabilityInStores
+  availabilityInStores: availabilityInStores[]
 }
 
 export interface availabilityInStores {

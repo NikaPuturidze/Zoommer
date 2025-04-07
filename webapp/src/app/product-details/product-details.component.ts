@@ -14,7 +14,7 @@ import { ScaleOnClickDirective } from '../shared/directives/scale-on-click.direc
 export class ProductDetailsComponent implements OnInit, AfterViewInit {
   private id!: number
   public productResponse!: ProductResponse
-  public availabilityInStores!: availabilityInStores
+  public availabilityInStores!: availabilityInStores[]
   public product!: Product
   public sliderOpen = false
   public imageIndex = 0
@@ -28,11 +28,13 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   public bundleTotalPrice = 0
   public bundleTotalSalePrice = 0
   public showMore = false
+  public showMoreA = false
   public tableHeights: number[] = []
   public specificationHeight: number[] = []
   public tableHeightsAfter: number[] = []
   public isViewReady = false
   public warrantyOpen = false
+  public availabilityType = false
 
   constructor(
     private apiService: ApiService,
@@ -114,6 +116,9 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     this.translateXSimilar = 0
     this.translateXAccesory = 0
     this.sliderOpen = false
+    this.warrantyOpen = false
+    this.showMore = false
+    this.showMoreA = false
     this.titleService.setTitle(this.product.metaTitle || this.product.name)
   }
 

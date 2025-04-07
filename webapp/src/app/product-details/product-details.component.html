@@ -617,6 +617,57 @@
         </div>
       }
     </div>
+    <div class="availability">
+      <div class="availability-top-row">
+        <h4>ფილიალები</h4>
+        <div class="availability-type">
+          <div class="type" (click)="availabilityType = false">
+            @if (!availabilityType) {
+              <img src="assets/product-details/gift-checked.svg" />
+            } @else {
+              <img src="assets/product-details/rectangle-orange.svg" />
+            }
+            <h4>მარაგშია</h4>
+          </div>
+          <div class="type" (click)="availabilityType = true">
+            @if (availabilityType) {
+              <img src="assets/product-details/gift-checked.svg" />
+            } @else {
+              <img src="assets/product-details/rectangle-orange.svg" />
+            }
+            <h4>შეკვეთიდან 2-5 დღეში</h4>
+          </div>
+        </div>
+      </div>
+      <div
+        class="availability-content"
+        [style.height]="showMoreA ? `${(availabilityInStores.length + 1) * 102 + 68}px` : '330px'"
+      >
+        @for (store of availabilityInStores; track $index) {
+          <div class="store">
+            <div class="address">
+              <h4>{{ store.branchName }}</h4>
+              <p>{{ store.city }} - {{ store.address }}</p>
+              <h4>{{ store.inStock ? 'მარაგშია' : 'არ არის მარაგში' }}</h4>
+            </div>
+            <div class="times">
+              <h4>{{ store.phoneNumber }}</h4>
+              <h5>ორშ-შაბ:{{ store.workingHoursMonToSat }}</h5>
+              <h5>კვირა{{ store.workingHoursSun }}</h5>
+            </div>
+          </div>
+        }
+      </div>
+      <div appScaleOnClick class="see-more-a" (click)="showMoreA = !showMoreA">
+        @if (showMoreA) {
+          <h4>აკეცვა</h4>
+          <img [style.transform]="'rotate(180deg)'" src="assets/product-details/arrow-down-orange.svg" />
+        } @else {
+          <h4>მეტის ნახვა</h4>
+          <img src="assets/product-details/arrow-down-orange.svg" />
+        }
+      </div>
+    </div>
   </section>
   <aside>
     <div class="aside-wrapper">
