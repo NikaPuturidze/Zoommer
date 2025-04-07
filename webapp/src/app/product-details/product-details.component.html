@@ -217,7 +217,7 @@
           </a>
         }
         @if (product.bundles.length > 0) {
-          <a (click)="scrollTo('simmilar')">
+          <a (click)="scrollTo('similar')">
             <h4>მსაგვსი</h4>
           </a>
         }
@@ -288,40 +288,40 @@
       </div>
     }
     @if (product.similarProductsList.length > 0) {
-      <div id="simmilar">
-        <div class="simmilar-title">
+      <div id="similar">
+        <div class="similar-title">
           <h2>მსგავსი პროდუქტები</h2>
         </div>
-        <div class="simmilar-slider">
-          <div class="simmilar-slider-wrapper" [style.transform]="'translateX(' + translateXSimmilar + '%)'">
-            @for (simmilar of product.similarProductsList; track $index) {
-              <div class="simmilar-container">
-                <div class="simmilar">
-                  <a [routerLink]="'/' + simmilar.route" class="image">
-                    <img [src]="simmilar.imageUrls[0]" />
+        <div class="similar-slider">
+          <div class="similar-slider-wrapper" [style.transform]="'translateX(' + translateXSimilar + '%)'">
+            @for (similar of product.similarProductsList; track $index) {
+              <div class="similar-container">
+                <div class="similar">
+                  <a [routerLink]="'/' + similar.route" class="image">
+                    <img [src]="similar.imageUrls[0]" />
                     @if (product.labelText) {
-                      <div class="best">{{ simmilar.labelText }}</div>
+                      <div class="best">{{ similar.labelText }}</div>
                     }
                   </a>
                   <div
-                    [routerLink]="'/' + simmilar.route"
+                    [routerLink]="'/' + similar.route"
                     class="description"
-                    [style.justifyContent]="roundPrice(simmilar.price) > 0 ? 'flex-start' : 'space-between'"
+                    [style.justifyContent]="roundPrice(similar.price) > 0 ? 'flex-start' : 'space-between'"
                   >
                     <div class="price">
-                      <h4 [style.color]="simmilar.previousPrice ? '#ec5e2a' : '#000'">{{ simmilar.price }} ₾</h4>
-                      @if (simmilar.previousPrice) {
-                        <span>{{ simmilar.price }} ₾</span>
+                      <h4 [style.color]="similar.previousPrice ? '#ec5e2a' : '#000'">{{ similar.price }} ₾</h4>
+                      @if (similar.previousPrice) {
+                        <span>{{ similar.price }} ₾</span>
                       }
                     </div>
-                    @if (roundPrice(simmilar.price) > 0) {
+                    @if (roundPrice(similar.price) > 0) {
                       <p>
                         თვეში:
-                        <span>{{ roundPrice(simmilar.price) }} ₾</span>
+                        <span>{{ roundPrice(similar.price) }} ₾</span>
                         -დან
                       </p>
                     }
-                    <a>{{ simmilar.productName }}</a>
+                    <a>{{ similar.productName }}</a>
                   </div>
                   <div class="buy">
                     <div class="compare">
@@ -336,8 +336,8 @@
               </div>
             }
           </div>
-          <img class="arr-left" (click)="previousSimmilar()" src="assets/product-details/slider-left-btn.svg" />
-          <img class="arr-right" (click)="nextSimmilar()" src="assets/product-details/slider-right-btn.svg" />
+          <img class="arr-left" (click)="previoussimilar()" src="assets/product-details/slider-left-btn.svg" />
+          <img class="arr-right" (click)="nextsimilar()" src="assets/product-details/slider-right-btn.svg" />
         </div>
       </div>
     }
@@ -346,56 +346,59 @@
         <h4>დამატებითი მახასიათებლები</h4>
       </div>
       @if (isViewReady) {
-        <div
-          class="specification-list"
-          [class.active]="!showMore"
-          [style.height]="showMore ? totalTableHeight() : '400px'"
-        >
-          @for (specifications of product.specificationGroup; track $index) {
-            <div class="specification" [style.marginBottom]="specifications.isActive ? '35px' : '10px'">
-              <div class="spec-title">
-                <h4>{{ specifications.groupName }}</h4>
-                <img
-                  (click)="specifications.isActive = !specifications.isActive"
-                  src="assets/product-details/arrow-up-black.svg"
-                  [style.transform]="specifications.isActive ? 'rotate(180deg)' : 'rotate(0deg)'"
-                />
-              </div>
-
-              <div
-                #tableWrapper
-                class="table-wrapper"
-                [style.height]="specifications.isActive ? `${tableHeights[$index]}px` : '0px'"
-              >
-                <table class="table">
-                  @for (specifiation of specifications.specifications; track $index) {
-                    <tbody class="table-body">
-                      <tr class="table-row">
-                        <td class="spec-name">
-                          <h4>{{ specifiation.specificationName }}</h4>
-                        </td>
-                        <td class="spec-meaning">
-                          <h4>{{ specifiation.specificationMeaning }}</h4>
-                        </td>
-                      </tr>
-                    </tbody>
-                  }
-                </table>
-              </div>
+        <div class="spec-wrapper">
+          <div class="see-more-wrapper">
+            <div class="see-more" (click)="showMore = !showMore">
+              @if (showMore) {
+                <h4>აკეცვა</h4>
+                <img [style.transform]="'rotate(180deg)'" src="assets/product-details/arrow-down-orange.svg" />
+              } @else {
+                <h4>მეტის ნახვა</h4>
+                <img src="assets/product-details/arrow-down-orange.svg" />
+              }
             </div>
-          }
+          </div>
+          <div
+            class="specification-list"
+            [class.active]="!showMore"
+            [style.height]="showMore ? totalTableHeight() : '400px'"
+          >
+            @for (specifications of product.specificationGroup; track $index) {
+              <div class="specification" [style.marginBottom]="specifications.isActive ? '40px' : '10px'">
+                <div class="spec-title">
+                  <h4>{{ specifications.groupName }}</h4>
+                  <img
+                    (click)="specifications.isActive = !specifications.isActive; swapHeight($index)"
+                    src="assets/product-details/arrow-up-black.svg"
+                    [style.transform]="specifications.isActive ? 'rotate(180deg)' : 'rotate(0deg)'"
+                  />
+                </div>
+
+                <div
+                  #tableWrapper
+                  class="table-wrapper"
+                  [style.height]="specifications.isActive ? `${tableHeights[$index]}px` : '0px'"
+                >
+                  <table class="table">
+                    @for (specifiation of specifications.specifications; track $index) {
+                      <tbody class="table-body">
+                        <tr class="table-row">
+                          <td class="spec-name">
+                            <h4>{{ specifiation.specificationName }}:</h4>
+                          </td>
+                          <td class="spec-meaning">
+                            <h4>{{ specifiation.specificationMeaning }}</h4>
+                          </td>
+                        </tr>
+                      </tbody>
+                    }
+                  </table>
+                </div>
+              </div>
+            }
+          </div>
         </div>
       }
-
-      <div class="see-more" (click)="showMore = !showMore">
-        @if (showMore) {
-          <h4>მეტის ნახვა</h4>
-          <img src="assets/product-details/arrow-down-orange.svg" />
-        } @else {
-          <h4>აკეცვა</h4>
-          <img [style.transform]="'rotate(180deg)'" src="assets/product-details/arrow-down-orange.svg" />
-        }
-      </div>
     </div>
   </section>
   <aside>

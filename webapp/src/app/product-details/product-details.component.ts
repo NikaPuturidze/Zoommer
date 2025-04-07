@@ -25,8 +25,10 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
   public translateXSimilar = 0
   public bundleTotalPrice = 0
   public bundleTotalSalePrice = 0
-  public showMore = true
+  public showMore = false
   public tableHeights: number[] = []
+  public specificationHeight: number[] = []
+  public tableHeightsAfter: number[] = []
   public isViewReady = false
 
   constructor(
@@ -64,10 +66,28 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     if (!this.tableWrapper?.length) return
 
     this.tableHeights = this.tableWrapper.map((wrapper) => wrapper.nativeElement.offsetHeight)
+    this.specificationHeight = this.tableHeights.map((height) => {
+      return height + 80
+    })
+
+    this.tableHeightsAfter = new Array(this.tableHeights.length).fill(0)
+  }
+
+  swapHeight(index: number) {
+    const current = this.specificationHeight[index]
+    const backup = this.tableHeightsAfter[index]
+
+    if (current !== 50) {
+      this.tableHeightsAfter[index] = current
+      this.specificationHeight[index] = 50
+    } else {
+      this.specificationHeight[index] = backup
+      this.tableHeightsAfter[index] = 0
+    }
   }
 
   totalTableHeight(): string {
-    return `${this.tableHeights.reduce((a, b) => a + b, 0) * 2 - this.tableHeights.length * 35 - 160}px`
+    return `${this.specificationHeight.reduce((a, b) => a + b, 20)}px`
   }
 
   getId() {
@@ -91,6 +111,7 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     this.translateXSimilar = 0
     this.translateXAccesory = 0
     this.sliderOpen = false
+    this.titleService.setTitle(this.product.metaTitle || this.product.name)
   }
 
   fetchProduct() {
@@ -98,7 +119,6 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
       this.productResponse = product
       this.product = this.productResponse.product
       this.refreshComponent()
-      this.titleService.setTitle(this.product.metaTitle || this.product.name)
       this.bundleTotalSalePrice = product.product.price
       this.bundleTotalPrice = this.bundleTotalSalePrice
       this.product.bundles.forEach((bundle) => {
@@ -191,14 +211,14 @@ export class ProductDetailsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  nextSimmilar() {
+  nextsimilar() {
     if (this.imageIndexSimilar < this.product.similarProductsList.length - 4) {
       this.imageIndexSimilar++
       this.translateXSimilar -= (180 / 730) * 100
     }
   }
 
-  previousSimmilar() {
+  previoussimilar() {
     if (this.imageIndexSimilar > 0) {
       this.imageIndexSimilar--
       this.translateXSimilar += (180 / 730) * 100
