@@ -420,8 +420,8 @@
         </div>
       </div>
       @if (warrantyOpen) {
-        <div class="warranty-popup">
-          <div class="warranty-wrapper">
+        <div class="warranty-popup" (click)="toggleWarranty()">
+          <div class="warranty-wrapper" (click)="$event.stopPropagation()">
             <div class="warranty">
               <img class="ext" (click)="toggleWarranty()" src="assets/product-details/mobile-modal-close.svg" />
               <div class="warranty-title">
