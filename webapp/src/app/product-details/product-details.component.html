@@ -641,7 +641,7 @@
       </div>
       <div
         class="availability-content"
-        [style.height]="showMoreA ? `${(availabilityInStores.length + 1) * 102 + 68}px` : '330px'"
+        [style.height]="showMoreA ? `${(availabilityInStores.length + 1) * 102 + 69}px` : '330px'"
       >
         @for (store of availabilityInStores; track $index) {
           <div class="store">
@@ -652,8 +652,8 @@
             </div>
             <div class="times">
               <h4>{{ store.phoneNumber }}</h4>
-              <h5>ორშ-შაბ:{{ store.workingHoursMonToSat }}</h5>
-              <h5>კვირა{{ store.workingHoursSun }}</h5>
+              <h5>ორშ-შაბ: {{ store.workingHoursMonToSat }}</h5>
+              <h5>კვირა: {{ store.workingHoursSun }}</h5>
             </div>
           </div>
         }
